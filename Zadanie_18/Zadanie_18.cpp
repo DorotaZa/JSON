@@ -52,5 +52,4 @@ int main()
     int sum = salary + bonus;
 
     std::cout << "Stefan earned " << sum << "." << std::endl;
-
 }
