@@ -24,6 +24,6 @@ private:
 	int _age = 0;
 };
 
-//tutaj defaultowo umieszczamy te funckje; wynika t z dokumentacji jsona
+//tutaj defaultowo umieszczamy te funckje; wynika to z dokumentacji jsona
 void to_json(json& j, const Student& s);
 void from_json(const json& j, Student& s);

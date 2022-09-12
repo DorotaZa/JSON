@@ -1,6 +1,10 @@
 #include "Student.hpp"
 
 
+using json = nlohmann::json;
+
+
+
 Student::Student()
 {
 }
@@ -40,7 +44,7 @@ int Student::getAge() const
 
 void to_json(json& j, const Student& s) //to sie nazywa konstruktorem/ lista inicjalizujaca(?)
 {
-	j = json{ {"name", s.getName()}, {"lastname", s.getLastName()}, {"age", s.getAge()} };
+	j = json{ {"name", s.getName()}, {"lastName", s.getLastName()}, {"age", s.getAge()} };
 }
 
 void from_json(const json& j, Student& s)
@@ -52,13 +56,19 @@ void from_json(const json& j, Student& s)
 	//nie mozemy napisac tej funkcji dokladnie tak jak wyzej, poniewaz pracujemy na klasie i polach prywatnych ktore musimy uzyskac, a get_to przyjmuje referencje na zmienna; pobiera wartosc do zmiennej;
 	//metody "obejscia":
 
-	//z uzyciem zmiennej
-	std::string name;
-	j.at("name").get_to(name);
-	s.setName(name);
+	////z uzyciem zmiennej
+	//std::string name;
+	//j.at("name").get_to(name);
+	//s.setName(name);
 
-	//szykiem przestawnym
-	s.setLastName(j["lastName"]); 
+	////szykiem przestawnym
+	//s.setLastName(j["lastName"]); 
+	//s.setAge(j["age"].get<int>());
+
+	//TRY TO MAKE IT WORK
+
+	s.setName(j["name"].get<std::string>());
+	s.setLastName(j["lastName"].get<std::string>());
 	s.setAge(j["age"].get<int>());
 
 }
